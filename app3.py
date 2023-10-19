@@ -68,11 +68,15 @@ def create_conversational_chain(vector_store):
                         #streaming=True, 
                         #callbacks=[StreamingStdOutCallbackHandler()],
                         #model_type="llama", config={'max_new_tokens': 500, 'temperature': 0.01})
-    llm = HuggingFaceHub(
-        streaming = True,
-        model = "mistralai/Mistral-7B-Instruct-v0.1",
-        callbacks=[StreamingStdOutCallbackHandler()],
-        input = {"temperature": 0.01, "max_length" :4096,"top_p":1})
+    repo_id = "mistralai/Mistral-7B-v0.1"
+    llm = HuggingFaceHub(huggingfacehub_api_token=huggingfacehub_api_token, 
+                         repo_id=repo_id, 
+                         model_kwargs={"temperature":0.2, "max_new_tokens":200})
+    #llm = HuggingFaceHub(
+        #streaming = True,
+        #model = "mistralai/Mistral-7B-Instruct-v0.1",
+        #callbacks=[StreamingStdOutCallbackHandler()],
+        #input = {"temperature": 0.01, "max_length" :4096,"top_p":1})
     memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
 
     chain = ConversationalRetrievalChain.from_llm(llm=llm, chain_type='stuff',
