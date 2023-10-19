@@ -1,5 +1,5 @@
 import streamlit as st
-from langchain import huggingface
+from langchain import HuggingFaceHub
 from streamlit_chat import message
 from langchain.chains import ConversationalRetrievalChain
 from langchain.embeddings import HuggingFaceEmbeddings
@@ -68,7 +68,7 @@ def create_conversational_chain(vector_store):
                         #streaming=True, 
                         #callbacks=[StreamingStdOutCallbackHandler()],
                         #model_type="llama", config={'max_new_tokens': 500, 'temperature': 0.01})
-    llm = huggingface(
+    llm = HuggingFaceHub(
         streaming = True,
         model = "mistralai/Mistral-7B-Instruct-v0.1",
         callbacks=[StreamingStdOutCallbackHandler()],
