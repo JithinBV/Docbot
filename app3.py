@@ -1,4 +1,5 @@
 import streamlit as st
+from langchain import huggingface
 from streamlit_chat import message
 from langchain.chains import ConversationalRetrievalChain
 from langchain.embeddings import HuggingFaceEmbeddings
